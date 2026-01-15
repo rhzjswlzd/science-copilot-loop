@@ -14,6 +14,7 @@
 **Bridging the gap between AI inference and wet-lab experiments.**
 
 A pragmatic framework accelerating scientific discovery using small-sample data and expert knowledge.
+![AI4S Practical Workflow](./images/workflow-diagram.png)
 
 ## **📖 Introduction**
 
