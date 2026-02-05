@@ -147,7 +147,7 @@ log(寿命) = 6.49 - 0.097×capacity_fade_100 + 0.077×dQ_minimum - 0.073×dQ_st
 1. `capacity_fade_100` 是最重要特征，符合工程直觉
 2. 发现一颗异常电池：预测 1185 圈，实际 538 圈 → 潜在未知衰减机理
 
-**状态**：✅ 已完成
+**状态**：🚧 更新中
 
 **详细记录**：[→ phase2-modeling/battery-lifecycle/](./phase2-modeling/battery-lifecycle/)
 
