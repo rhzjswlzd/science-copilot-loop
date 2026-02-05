@@ -2,10 +2,10 @@
 
 <div align="center">
 
-  <a href="./README.md">
+  <a href="./README_EN.md">
     <img src="https://img.shields.io/badge/English-En-blue?style=flat-square" alt="English">
   </a>
-  <a href="./README_CN.md">
+  <a href="./README.md">
     <img src="https://img.shields.io/badge/中文-CN-red?style=flat-square" alt="Chinese">
   </a>
 
