@@ -1,5 +1,8 @@
 # 锂电池循环寿命预测
 
+**状态**：🚧 更新中
+
+
 ## 数据来源
 
 **论文**：*Data-driven prediction of battery cycle life before capacity degradation*  
