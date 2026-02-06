@@ -60,6 +60,8 @@
 - **研究内容**：研究问题、方法论、主要贡献
 - **结果评估**：核心结果、局限性、与电池预测的关联
 
+完整的结构化摘要请参阅 📄 **[Structured Summaries](structured_summaries.md)**
+
 ### 3.3 Cross-Paper Analysis
 
 基于结构化摘要进行多维度对比分析：
@@ -70,6 +72,8 @@
 | 数据集对比 | 规模、电池类型、公开性 |
 | 性能指标 | 预测精度、效率提升 |
 | 研究脉络 | 引用关系、方法传承 |
+
+详细的跨论文对比分析请参阅 📄 **[Cross-Paper Analysis](cross_paper_analysis.md)**
 
 ---
 
