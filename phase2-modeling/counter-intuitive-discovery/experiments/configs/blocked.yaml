@@ -1,0 +1,46 @@
+# Blocked Experiment Configuration
+# Removes top conventional features to discover hidden patterns
+
+dataset:
+  plugin: battery_dataset
+  params:
+    data_path: /path/to/battery/data/
+    test_size: 0.2
+    random_state: 42
+
+feature_blocking:
+  strategy: top_k        # Options: top_k, threshold
+  k: 5                   # Remove top-5 most important conventional features
+  # threshold: 0.7       # Alternative: remove features contributing 70% cumulative importance
+  
+  # Load feature importance from baseline run
+  baseline_path: outputs/baseline/feature_importance.csv
+
+model:
+  type: elastic_net
+  params:
+    alpha: 0.1
+    l1_ratio: 0.3
+    max_iter: 10000
+    random_state: 42
+
+training:
+  cv_folds: 5
+  scoring: neg_mean_absolute_percentage_error
+
+explainability:
+  methods:
+    - shap
+    - permutation
+  shap_samples: 100
+  permutation_repeats: 10
+  
+  # Highlight newly-important features
+  compare_to_baseline: true
+
+output:
+  save_path: outputs/blocked/
+  save_model: true
+  save_predictions: true
+  save_shap_values: true
+  save_blocked_features: true  # Log which features were removed
