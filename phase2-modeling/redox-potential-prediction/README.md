@@ -101,7 +101,7 @@ SMILES → 分子图（原子=节点，键=边） → D-MPNN 消息传递 → �
 
 ### 预测结果
 
-![预测 vs 实验 Parity Plot](./figures/chen_parity_plot.png)
+![预测 vs 实验对比](./figures/predictions_comparison.png)
 
 模型预测值通过参考电极换算（E(vs Li⁺/Li) = E(vs vacuum) - 1.24V）后与实验值对比。大部分预测落在 ±0.5V 范围内。
 
