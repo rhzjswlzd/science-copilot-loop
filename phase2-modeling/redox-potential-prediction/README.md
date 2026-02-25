@@ -69,12 +69,17 @@ SMILES → 分子图（原子=节点，键=边） → D-MPNN 消息传递 → �
 
 ## 模型评估
 
-在 5,241 个测试集分子上的 XGBoost 预测散点图和残差分布：
+### 方案 A：XGBoost Parity Plot
 
-![XGBoost 预测 vs 真实值 + 残差分布](./figures/evaluation.png)
+在 5,241 个测试集分子上的预测 vs 真实值散点图（±0.5V 置信带）：
 
-- 左图：预测值 vs DFT计算值，大部分点集中在 y=x 对角线附近
-- 右图：残差以 0 为中心呈近似正态分布，无系统性偏差
+![XGBoost 测试集 Parity Plot](./figures/xgb_test_parity.png)
+
+### 方案 B：Chemprop D-MPNN 5-Run Ensemble Parity Plot
+
+5 次独立训练取 Ensemble 平均，颜色编码每个分子的预测不确定性（σ）：
+
+![Chemprop Ensemble Parity Plot](./figures/chemprop_ensemble_parity.png)
 
 ---
 
