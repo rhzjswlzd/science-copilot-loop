@@ -20,4 +20,20 @@
 
 ---
 
-*更多项目待补充...*
+### 2.2 数据驱动的低估参数识别
+
+**状态**：🎯 架构设计完成
+
+**详细记录**：[→ counter-intuitive-discovery/](./counter-intuitive-discovery/)
+
+---
+
+### 2.3 有机分子氧化还原电位预测
+
+**状态**：✅ 完成
+
+**数据来源**：OMEAD — 26,218 个有机小分子 DFT 计算数据
+
+**方法**：XGBoost + Morgan FP（MAE 0.372V）、Chemprop D-MPNN Ensemble（MAE 0.314V）
+
+**详细记录**：[→ redox-potential-prediction/](./redox-potential-prediction/)

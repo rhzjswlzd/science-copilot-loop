@@ -1,0 +1,6 @@
+Molecule,Full_Name,SMILES,Formula,XGB_vacuum_V,XGB_LiLi_V,Exp_LiLi_V,XGB_delta_V,Source,CP_vacuum_V,CP_LiLi_V,CP_delta_V,Ensemble_LiLi_V,Ensemble_delta_V
+TAQ,bis-tetraaminobenzoquinone (BTABQ),Nc1c(N)c(=O)c2[nH]c3c(=O)c(N)c(N)c(=O)c3[nH]c2c1=O,C12H10N6O4,3.1277,1.8877,2.5,-0.6123,ACS Cent. Sci. 2024,2.7828,1.5428,-0.9572,1.7152,-0.7848
+TABQ,tetraamino-p-benzoquinone,NC1=C(N)C(=O)C(N)=C(N)C1=O,C6H8N4O2,3.4335,2.1935,2.7,-0.5065,Joule 2023,2.9417,1.7017,-0.9983,1.9476,-0.7524
+AQ,anthraquinone,O=C1c2ccccc2C(=O)c2ccccc21,C14H8O2,2.6865,1.4465,2.3,-0.8535,Literature,3.0827,1.8427,-0.4573,1.6446,-0.6554
+BQ,p-benzoquinone,O=C1C=CC(=O)C=C1,C6H4O2,2.6901,1.4501,2.8,-1.3499,Literature,4.1975,2.9575,0.1575,2.2038,-0.5962
+PT,"5,7,12,14-pentacenetetrone",O=c1c2ccccc2c(=O)c2cc3c(=O)c4ccccc4c(=O)c3cc12,C22H10O4,3.7055,2.4655,2.6,-0.1345,Joule 2023,1.2586,0.0186,-2.5814,1.242,-1.358

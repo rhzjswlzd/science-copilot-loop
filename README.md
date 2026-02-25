@@ -64,6 +64,13 @@ science-copilot-loop/
 │   │   ├── experiments/                # 实验配置与执行
 │   │   ├── models/                     # 模型定义
 │   │   └── utils/                      # 工具函数
+│   ├── redox-potential-prediction/     # 有机分子氧化还原电位预测
+│   │   ├── src/                        # 模型训练与推理代码
+│   │   ├── data/                       # OMEAD 数据集
+│   │   ├── models/                     # 训练好的模型
+│   │   ├── figures/                    # 评估图表
+│   │   ├── docs/                       # 技术文档
+│   │   └── app.py                      # Gradio Web Demo
 │   └── ...
 │
 ├── phase3-data/                 # 阶段3：数据与审阅
@@ -113,7 +120,7 @@ science-copilot-loop/
 
 > **目标**：利用统计学和机器学习进行预测，提供不确定性量化评估
 
-**在科学研究中，机器学习模型通常被视为"黑盒预测器"**，其价值局限于提供数值结果。然而，模型的真正潜力不仅在于预测本身，更在于其学习过程中揭示的特征依赖关系——这些关系可能指向被人类忽视的物理机制或测量维度。本阶段的两个项目从**算法选择**和**特征选择**两个正交维度出发，系统性地探索机器学习辅助科学发现的路径。
+**在科学研究中，机器学习模型通常被视为"黑盒预测器"**，其价值局限于提供数值结果。然而，模型的真正潜力不仅在于预测本身，更在于其学习过程中揭示的特征依赖关系——这些关系可能指向被人类忽视的物理机制或测量维度。本阶段的三个项目从**算法选择**、**特征选择**和**分子结构编码**三个维度出发，系统性地探索机器学习辅助科学发现的路径。
 
 ## 实操记录
 
@@ -127,9 +134,9 @@ science-copilot-loop/
 
 **当前进展**：**锂电池循环寿命预测**
 
-- **数据来源**：*Data-driven prediction of battery cycle life before capacity degradation* — Severson et al., Nature Energy, 2019
-- **数据集规模**：140 颗电池，26.03 GB
-- **特征工程**：提取 ΔQ(V) = Q₁₀₀(V) - Q₁₀(V) 差分容量曲线，计算 9 个统计特征 + 6 个汇总特征（温度、内阻、充电时长等）
+* **数据来源**：*Data-driven prediction of battery cycle life before capacity degradation* — Severson et al., Nature Energy, 2019
+* **数据集规模**：140 颗电池，26.03 GB
+* **特征工程**：提取 ΔQ(V) = Q₁₀₀(V) - Q₁₀(V) 差分容量曲线，计算 9 个统计特征 + 6 个汇总特征（温度、内阻、充电时长等）
 
 **已测试算法**：
 
@@ -138,6 +145,7 @@ science-copilot-loop/
 | **Elastic Net** | 15.15% | 0.70 | ~1s | ✅ 线性权重 | `capacity_fade_100` 最重要，符合工程直觉 |
 
 **模型方程示例**（Elastic Net）：
+
 ```
 log(寿命) = 6.49 - 0.097×capacity_fade_100 + 0.077×dQ_minimum - 0.073×dQ_std + ...
 ```
@@ -199,16 +207,42 @@ Phase 4（机理探索）
 | **机理研究** | 深入分析（Phase 4） | 揭示物理本质，理论突破 |
 
 **价值定位**：
-- ✅ 缩小探索范围（数十个特征 → 3-5个线索）
-- ✅ 生成可验证假说（机器学习权重 → 物理假设）
-- ✅ 指导实验设计（针对性实验而非盲目试错）
-- ✅ 加速机理研究（数据触发灵感）
+* ✅ 缩小探索范围（数十个特征 → 3-5个线索）
+* ✅ 生成可验证假说（机器学习权重 → 物理假设）
+* ✅ 指导实验设计（针对性实验而非盲目试错）
+* ✅ 加速机理研究（数据触发灵感）
 
 **认知边界**：本项目仍受限于人类定义的特征空间（25个统计特征），但在现有框架内能够发现"被低估的维度"，为后续突破提供起点。
 
 **状态**：🎯 架构设计完成，待数据集实现
 
 **详细记录**：[→ phase2-modeling/counter-intuitive-discovery/](./phase2-modeling/counter-intuitive-discovery/)
+
+---
+
+### 项目 2.3：有机分子氧化还原电位预测（Redox Potential Prediction）
+
+**训练 ML 代理模型从分子 2D 结构（SMILES）直接预测氧化还原电位，替代耗时的 DFT 量子化学计算**，服务于有机电极材料的高通量筛选场景。
+
+**数据来源**：OMEAD — 26,218 个有机小分子的 DFT 计算氧化还原电位
+
+**两种建模方案**：
+
+| 方案 | 方法 | MAE | R² | 特征工程 |
+|------|------|-----|-----|----------|
+| A | XGBoost + Morgan FP (2048-bit) | 0.372 V | 0.703 | 手工设计 2058 维 |
+| B | Chemprop D-MPNN (5-run Ensemble) | **0.314 V** | **0.736** | 端到端自动学习 |
+
+**实验验证**：选取 5 个文献报道的有机电极分子（TAQ、TABQ、AQ、BQ、PT），将模型预测值与实验电位对比，偏差在 0.5V 以内。
+
+**关键成果**：
+* 代理模型推理速度 ~2ms/分子，比 DFT 快约 100 万倍
+* 两种方案各有优势：XGBoost 可解释性强、部署简单；D-MPNN 精度更高、无需特征工程
+* 附带 Gradio Web Demo，输入 SMILES 即时预测
+
+**状态**：✅ 完成
+
+**详细记录**：[→ phase2-modeling/redox-potential-prediction/](./phase2-modeling/redox-potential-prediction/)
 
 ---
 
@@ -234,9 +268,9 @@ Phase 4（机理探索）
 
 ## 📚 参考资料
 
-- [MinerU - PDF 提取工具](https://github.com/opendatalab/MinerU)
-- [Severson et al., Nature Energy, 2019](https://www.nature.com/articles/s41560-019-0356-8)
-- [BEEP - 电池数据处理工具](https://github.com/TRI-AMDD/beep)
+* [MinerU - PDF 提取工具](https://github.com/opendatalab/MinerU)
+* [Severson et al., Nature Energy, 2019](https://www.nature.com/articles/s41560-019-0356-8)
+* [BEEP - 电池数据处理工具](https://github.com/TRI-AMDD/beep)
 
 ---
 
